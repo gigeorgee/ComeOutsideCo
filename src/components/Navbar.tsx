@@ -1,32 +1,30 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import styled from 'styled-components';
-import logo from '../assets/images/Logo.png';
+import { Link } from 'react-router-dom';
+import Logo from '../assets/images/Logo.png';
 
 const Nav = styled.nav`
-  position: fixed;
+  background-color: rgba(0, 0, 0, 0.9);
+  backdrop-filter: blur(10px);
+  padding: 1rem;
+  position: sticky;
   top: 0;
-  left: 0;
-  right: 0;
   z-index: 50;
-  background: rgba(0, 0, 0, 0.8);
-  backdrop-filter: blur(8px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 `;
 
-const NavContainer = styled.div`
+const NavContent = styled.div`
   max-width: 1200px;
   margin: 0 auto;
-  padding: 1rem;
   display: flex;
   justify-content: space-between;
   align-items: center;
 `;
 
-const Logo = styled.img`
+const LogoImage = styled.img`
   height: 35px;
   width: auto;
-  cursor: pointer;
-  transition: transform 0.2s ease;
+  transition: transform 0.2s;
 
   &:hover {
     transform: scale(1.05);
@@ -35,33 +33,23 @@ const Logo = styled.img`
 
 const NavLinks = styled.div`
   display: flex;
-  gap: 2rem;
-`;
-
-const NavLink = styled(Link)`
-  color: white;
-  text-decoration: none;
-  font-weight: 500;
-  transition: color 0.2s ease;
-
-  &:hover {
-    color: #69c280;
-  }
+  gap: 1rem;
+  align-items: center;
 `;
 
 const Navbar = () => {
   return (
     <Nav>
-      <NavContainer>
+      <NavContent>
         <Link to="/">
-          <Logo src={logo} alt="Come Outside Logo" />
+          <LogoImage src={Logo} alt="Come Outside Logo" />
         </Link>
         <NavLinks>
-          <NavLink to="/">Home</NavLink>
-          <NavLink to="/waiver">Waiver</NavLink>
-          <NavLink to="/calendar">Calendar</NavLink>
+          <Link to="/waiver" className="btn btn-primary">
+            Sign Waiver
+          </Link>
         </NavLinks>
-      </NavContainer>
+      </NavContent>
     </Nav>
   );
 };

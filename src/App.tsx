@@ -100,27 +100,27 @@ const staggerChildren = {
 } as const;
 
 const testimonialVariants = {
-  hidden: { opacity: 0, y: 50 },
+  hidden: { opacity: 0, y: 30 },
   visible: { 
     opacity: 1, 
     y: 0,
     transition: {
-      duration: 0.6,
+      duration: 0.8,
       ease: "easeOut"
     }
   }
-};
+} as const;
 
 const containerVariants = {
   hidden: { opacity: 0 },
   visible: {
     opacity: 1,
     transition: {
-      staggerChildren: 0.2,
+      staggerChildren: 0.15,
       delayChildren: 0.1
     }
   }
-};
+} as const;
 
 const HomePage = () => {
   const navigate = useNavigate();
@@ -303,8 +303,8 @@ const HomePage = () => {
           <motion.div 
             className="grid grid-cols-1 md:grid-cols-3 gap-8 mt-16 text-center"
             variants={staggerChildren}
-            initial="initial"
-            whileInView="whileInView"
+            initial="hidden"
+            whileInView="visible"
             viewport={{ once: true }}
           >
             {[
@@ -328,10 +328,10 @@ const HomePage = () => {
           <div className="mt-20">
             <motion.h2 
               className="text-3xl md:text-4xl font-bold text-center mb-12"
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
+              variants={fadeInUp}
+              initial="hidden"
+              whileInView="visible"
               viewport={{ once: true }}
-              transition={{ duration: 0.6 }}
             >
               Our Stories
             </motion.h2>
@@ -340,7 +340,7 @@ const HomePage = () => {
               variants={containerVariants}
               initial="hidden"
               whileInView="visible"
-              viewport={{ once: true, margin: "-50px" }}
+              viewport={{ once: true, margin: "-100px" }}
             >
               {[
                 {
@@ -366,7 +366,6 @@ const HomePage = () => {
                   key={index}
                   variants={testimonialVariants}
                   className="bg-[#1a1a1a] p-6 md:p-8 rounded-lg border border-primary/10 group hover:ring-2 hover:ring-primary transition-all duration-300 flex flex-col h-full"
-                  transition={{ duration: 0.5 }}
                 >
                   <p className="text-gray-300 flex-1">"{testimonial.quote}"</p>
                   <div className="flex items-center gap-4 pt-6 mt-auto">

@@ -5,7 +5,7 @@ import { X, Facebook, Instagram, MapPin, Send } from 'lucide-react';
 
 const FormContainer = styled(motion.div)`
   max-width: 800px;
-  margin: 120px auto 40px;
+  margin: 10px auto 40px;
   padding: 2rem;
   background: rgba(0, 0, 0, 0.8);
   border-radius: 12px;
@@ -254,6 +254,24 @@ const SocialLink = styled.a`
   }
 `;
 
+const FormTitle = styled.div`
+  text-align: center;
+  margin-bottom: 2rem;
+
+  h1 {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: #69c280;
+    margin-bottom: 1rem;
+  }
+
+  p {
+    color: #e0e0e0;
+    font-size: 1.1rem;
+    line-height: 1.6;
+  }
+`;
+
 const SuccessModal = ({ isOpen, onClose }: { isOpen: boolean; onClose: () => void }) => {
   return (
     <AnimatePresence>
@@ -414,6 +432,11 @@ const WaiverForm = () => {
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5 }}
       >
+        <FormTitle>
+          <h1>Waiver Form</h1>
+          <p>Please complete this form to join our running community. Your safety and well-being are our top priority.</p>
+        </FormTitle>
+
         <Form onSubmit={handleSubmit}>
           {submitStatus && (
             <Message type={submitStatus.type}>
