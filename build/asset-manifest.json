@@ -1,0 +1,20 @@
+{
+  "files": {
+    "main.css": "/ComeOutsideCo/static/css/main.4216c005.css",
+    "main.js": "/ComeOutsideCo/static/js/main.1a8601ac.js",
+    "static/media/3k-run.jpg": "/ComeOutsideCo/static/media/3k-run.11ffcca550eaaf982667.jpg",
+    "static/media/group-running.jpg": "/ComeOutsideCo/static/media/group-running.45a9ffe63aa027b1bcf7.jpg",
+    "static/media/Fruit.jpg": "/ComeOutsideCo/static/media/Fruit.da8e11b900351009dc02.jpg",
+    "static/media/5k-run.jpg": "/ComeOutsideCo/static/media/5k-run.ee5a9ad33065388d5e1f.jpg",
+    "static/media/adventure-hike.jpg": "/ComeOutsideCo/static/media/adventure-hike.6e318ff6f5ebe48972ce.jpg",
+    "static/media/3k-walk.jpg": "/ComeOutsideCo/static/media/3k-walk.c623a5db515c6b64ea10.jpg",
+    "static/media/Logo.png": "/ComeOutsideCo/static/media/Logo.8e742bac31d6158745cf.png",
+    "index.html": "/ComeOutsideCo/index.html",
+    "main.4216c005.css.map": "/ComeOutsideCo/static/css/main.4216c005.css.map",
+    "main.1a8601ac.js.map": "/ComeOutsideCo/static/js/main.1a8601ac.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.4216c005.css",
+    "static/js/main.1a8601ac.js"
+  ]
+}

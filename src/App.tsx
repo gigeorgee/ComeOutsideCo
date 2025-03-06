@@ -401,6 +401,7 @@ const App = () => {
           <Route path="/" element={<HomePage />} />
           <Route path="/waiver" element={<WaiverPage />} />
           <Route path="/calendar" element={<Calendar />} />
+          <Route path="*" element={<HomePage />} />
         </RouterRoutes>
       </AppContainer>
     </HashRouter>
