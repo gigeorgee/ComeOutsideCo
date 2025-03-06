@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Children } from 'react';
 import { ArrowRight, CalendarPlus, MapPin, Clock } from 'lucide-react';
 import { BrowserRouter, Routes as RouterRoutes, Route, useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
@@ -16,6 +16,7 @@ import threeKImage from './assets/images/3k-run.jpg';
 import walkImage from './assets/images/3k-walk.jpg';
 import hikeImage from './assets/images/adventure-hike.jpg';
 import groupRunningImage from './assets/images/group-running.jpg';
+import fruitImage from './assets/images/Fruit.jpg';
 
 // Styled Components
 const AppContainer = styled.div`
@@ -80,17 +81,45 @@ interface EventType {
 }
 
 const fadeInUp = {
-  initial: { opacity: 0, y: 30 },
-  whileInView: { opacity: 1, y: 0 },
-  viewport: { once: true },
-  transition: { duration: 0.8, ease: "easeOut" }
-};
+  hidden: { opacity: 0, y: 30 },
+  visible: { 
+    opacity: 1, 
+    y: 0,
+    transition: { duration: 0.8, ease: "easeOut" }
+  }
+} as const;
 
 const staggerChildren = {
-  initial: { opacity: 0 },
-  whileInView: { opacity: 1 },
-  viewport: { once: true },
-  transition: { staggerChildren: 0.2 }
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.2
+    }
+  }
+} as const;
+
+const testimonialVariants = {
+  hidden: { opacity: 0, y: 50 },
+  visible: { 
+    opacity: 1, 
+    y: 0,
+    transition: {
+      duration: 0.6,
+      ease: "easeOut"
+    }
+  }
+};
+
+const containerVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.2,
+      delayChildren: 0.1
+    }
+  }
 };
 
 const HomePage = () => {
@@ -179,13 +208,19 @@ const HomePage = () => {
         <div className="max-w-7xl mx-auto px-4">
           <motion.h2 
             className="text-3xl md:text-4xl font-bold text-center mb-12"
-            {...fadeInUp}
+            variants={fadeInUp}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
           >
             Weekly Events
           </motion.h2>
           <motion.div 
             className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6"
             variants={staggerChildren}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
           >
             {events.map((event, index) => (
               <motion.div
@@ -193,30 +228,30 @@ const HomePage = () => {
                 variants={fadeInUp}
               >
                 <EventCard className="group hover:ring-2 hover:ring-primary transition-all">
-                  <div className="relative h-48">
-                    <img src={event.image} alt={event.title} className="w-full h-full object-cover" />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black to-transparent" />
-                  </div>
+                <div className="relative h-48">
+                  <img src={event.image} alt={event.title} className="w-full h-full object-cover" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black to-transparent" />
+                </div>
                   <div className="p-6 flex flex-col flex-1">
                     <div className="flex-1">
-                      <h3 className="text-xl font-bold mb-4">{event.title}</h3>
+                  <h3 className="text-xl font-bold mb-4">{event.title}</h3>
                       <div className="space-y-3 text-gray-300">
                         <div className="flex items-center">
                           <MapPin className="w-5 h-5 mr-3 text-primary" />
-                          <p>{event.location}</p>
-                        </div>
+                      <p>{event.location}</p>
+                    </div>
                         <div className="flex items-center">
                           <Clock className="w-5 h-5 mr-3 text-primary" />
-                          <p>{event.time}</p>
-                        </div>
-                        <p className="text-sm mt-4">{event.description}</p>
-                      </div>
+                      <p>{event.time}</p>
+                    </div>
+                    <p className="text-sm mt-4">{event.description}</p>
+                  </div>
                     </div>
                     <button className="btn btn-primary w-full mt-6 flex items-center justify-center">
-                      Join Event
+                    Join Event
                       <CalendarPlus className="ml-2 w-5 h-5" />
-                    </button>
-                  </div>
+                  </button>
+                </div>
                 </EventCard>
               </motion.div>
             ))}
@@ -235,7 +270,7 @@ const HomePage = () => {
               transition={{ duration: 0.8 }}
             >
               <img 
-                src={groupRunningImage}
+                src={fruitImage}
                 alt="Our running community in action"
                 className="w-full h-full object-cover"
               />
@@ -293,83 +328,62 @@ const HomePage = () => {
           <div className="mt-20">
             <motion.h2 
               className="text-3xl md:text-4xl font-bold text-center mb-12"
-              {...fadeInUp}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6 }}
             >
-              Success Stories
+              Our Stories
             </motion.h2>
             <motion.div 
               className="grid grid-cols-1 md:grid-cols-3 gap-6"
-              variants={staggerChildren}
-              initial="initial"
-              whileInView="whileInView"
-              viewport={{ once: true }}
+              variants={containerVariants}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, margin: "-50px" }}
             >
-              <motion.div 
-                className="bg-[#1a1a1a] p-6 md:p-8 rounded-lg border border-primary/10 group hover:ring-2 hover:ring-primary transition-all duration-300"
-              >
-                <p className="text-gray-300 mb-6">
-                  "Come Outside changed my perspective on running. It's not just about the exercise - 
-                  it's about the amazing people you meet and the community you become part of."
-                </p>
-                <div className="flex items-center gap-4">
-                  <div className="w-12 h-12 rounded-full overflow-hidden">
-                    <img 
-                      src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&q=80" 
-                      alt="Sarah"
-                      className="w-full h-full object-cover"
-                    />
+              {[
+                {
+                  quote: "Come Outside changed my perspective on running. It's not just about the exercise - it's about the amazing people you meet and the community you become part of.",
+                  name: "Sarah Johnson",
+                  since: "2022",
+                  image: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&q=80"
+                },
+                {
+                  quote: "From barely being able to run 1K to completing my first half marathon - the support from this community has been incredible. They believe in you even when you don't believe in yourself.",
+                  name: "Michael Chen",
+                  since: "2023",
+                  image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&q=80"
+                },
+                {
+                  quote: "The weekend runs have become the highlight of my week. The positive energy and encouragement from everyone make every session special.",
+                  name: "Emma Thompson",
+                  since: "2023",
+                  image: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?auto=format&fit=crop&q=80"
+                }
+              ].map((testimonial, index) => (
+                <motion.div 
+                  key={index}
+                  variants={testimonialVariants}
+                  className="bg-[#1a1a1a] p-6 md:p-8 rounded-lg border border-primary/10 group hover:ring-2 hover:ring-primary transition-all duration-300 flex flex-col h-full"
+                  transition={{ duration: 0.5 }}
+                >
+                  <p className="text-gray-300 flex-1">"{testimonial.quote}"</p>
+                  <div className="flex items-center gap-4 pt-6 mt-auto">
+                    <div className="w-12 h-12 rounded-full overflow-hidden">
+                      <img 
+                        src={testimonial.image}
+                        alt={testimonial.name}
+                        className="w-full h-full object-cover"
+                      />
+                    </div>
+                    <div>
+                      <h4 className="font-semibold text-primary">{testimonial.name}</h4>
+                      <p className="text-sm text-gray-400">Member since {testimonial.since}</p>
+                    </div>
                   </div>
-                  <div>
-                    <h4 className="font-semibold text-primary">Sarah Johnson</h4>
-                    <p className="text-sm text-gray-400">Member since 2022</p>
-                  </div>
-                </div>
-              </motion.div>
-
-              <motion.div 
-                className="bg-[#1a1a1a] p-6 md:p-8 rounded-lg border border-primary/10 group hover:ring-2 hover:ring-primary transition-all duration-300"
-              >
-                <p className="text-gray-300 mb-6">
-                  "From barely being able to run 1K to completing my first half marathon - the support 
-                  from this community has been incredible. They believe in you even when you don't 
-                  believe in yourself."
-                </p>
-                <div className="flex items-center gap-4">
-                  <div className="w-12 h-12 rounded-full overflow-hidden">
-                    <img 
-                      src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&q=80" 
-                      alt="Michael"
-                      className="w-full h-full object-cover"
-                    />
-                  </div>
-                  <div>
-                    <h4 className="font-semibold text-primary">Michael Chen</h4>
-                    <p className="text-sm text-gray-400">Member since 2023</p>
-                  </div>
-                </div>
-              </motion.div>
-
-              <motion.div 
-                className="bg-[#1a1a1a] p-6 md:p-8 rounded-lg border border-primary/10 group hover:ring-2 hover:ring-primary transition-all duration-300"
-              >
-                <p className="text-gray-300 mb-6">
-                  "The weekend runs have become the highlight of my week. The positive energy and 
-                  encouragement from everyone make every session special."
-                </p>
-                <div className="flex items-center gap-4">
-                  <div className="w-12 h-12 rounded-full overflow-hidden">
-                    <img 
-                      src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?auto=format&fit=crop&q=80" 
-                      alt="Emma"
-                      className="w-full h-full object-cover"
-                    />
-                  </div>
-                  <div>
-                    <h4 className="font-semibold text-primary">Emma Thompson</h4>
-                    <p className="text-sm text-gray-400">Member since 2023</p>
-                  </div>
-                </div>
-              </motion.div>
+                </motion.div>
+              ))}
             </motion.div>
           </div>
         </div>
