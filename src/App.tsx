@@ -1,6 +1,6 @@
 import React, { Children } from 'react';
 import { ArrowRight, CalendarPlus, MapPin, Clock } from 'lucide-react';
-import { BrowserRouter, Routes as RouterRoutes, Route, useNavigate } from 'react-router-dom';
+import { HashRouter, Routes as RouterRoutes, Route, useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import { motion, useSpring, useInView, useMotionValue, useTransform } from 'framer-motion';
 
@@ -393,9 +393,9 @@ const HomePage = () => {
   );
 };
 
-function App() {
+const App = () => {
   return (
-    <BrowserRouter>
+    <HashRouter>
       <AppContainer>
         <RouterRoutes>
           <Route path="/" element={<HomePage />} />
@@ -403,8 +403,8 @@ function App() {
           <Route path="/calendar" element={<Calendar />} />
         </RouterRoutes>
       </AppContainer>
-    </BrowserRouter>
+    </HashRouter>
   );
-}
+};
 
 export default App;
