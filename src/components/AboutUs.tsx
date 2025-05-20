@@ -4,6 +4,7 @@ import { motion } from 'framer-motion';
 import { MapPin, Users, Heart, Star } from 'lucide-react';
 import Navbar from './Navbar';
 import Footer from './Footer';
+import testimonials from '../config/testimonials';
 
 const PageContainer = styled.div`
   overflow: hidden;
@@ -98,7 +99,7 @@ const StoryImage = styled(motion.div)`
   height: 500px;
   border-radius: 20px;
   overflow: hidden;
-  
+
   img {
     width: 100%;
     height: 100%;
@@ -217,8 +218,8 @@ const AboutUs = () => {
       <PageContainer>
         <HeroSection>
           <ParallaxBg>
-            <img 
-              src="https://images.unsplash.com/photo-1571008887538-b36bb32f4571?auto=format&fit=crop&q=80" 
+            <img
+              src="https://images.unsplash.com/photo-1571008887538-b36bb32f4571?auto=format&fit=crop&q=80"
               alt="Group running together"
             />
           </ParallaxBg>
@@ -229,7 +230,7 @@ const AboutUs = () => {
           >
             <Title>Our Story</Title>
             <Subtitle>
-              Building a community that goes beyond running, inspiring individuals to embrace 
+              Building a community that goes beyond running, inspiring individuals to embrace
               challenges and discover their potential together.
             </Subtitle>
           </HeroContent>
@@ -244,8 +245,8 @@ const AboutUs = () => {
                 viewport={{ once: true }}
                 transition={{ duration: 0.8 }}
               >
-                <img 
-                  src="https://images.unsplash.com/photo-1552674605-db6ffd4facb5?auto=format&fit=crop&q=80" 
+                <img
+                  src="https://images.unsplash.com/photo-1552674605-db6ffd4facb5?auto=format&fit=crop&q=80"
                   alt="Running community"
                 />
               </StoryImage>
@@ -257,13 +258,13 @@ const AboutUs = () => {
               >
                 <SectionTitle>Where We Started</SectionTitle>
                 <StoryText>
-                  Come Outside began with a simple idea: creating a space where runners of all levels 
-                  could come together, support each other, and push their limits. Based in the heart 
-                  of Roundhay, we've grown from a small group of enthusiasts to a thriving community 
+                  Come Outside began with a simple idea: creating a space where runners of all levels
+                  could come together, support each other, and push their limits. Based in the heart
+                  of Roundhay, we've grown from a small group of enthusiasts to a thriving community
                   of runners, walkers, and adventurers.
                 </StoryText>
                 <StoryText>
-                  Meeting at the iconic Oakwood Clock, our community has become a beacon for those 
+                  Meeting at the iconic Oakwood Clock, our community has become a beacon for those
                   seeking not just physical activity, but genuine connections and lasting friendships.
                 </StoryText>
               </StoryContent>
@@ -300,78 +301,31 @@ const AboutUs = () => {
             </Stats>
 
             <TestimonialsGrid>
-              <TestimonialCard
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5 }}
-              >
-                <QuoteText>
-                  "Come Outside changed my perspective on running. It's not just about the exercise - 
-                  it's about the amazing people you meet and the community you become part of."
-                </QuoteText>
-                <QuoteAuthor>
-                  <AuthorImage>
-                    <img 
-                      src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&q=80" 
-                      alt="Sarah"
-                    />
-                  </AuthorImage>
-                  <AuthorInfo>
-                    <h4>Sarah Johnson</h4>
-                    <p>Member since 2022</p>
-                  </AuthorInfo>
-                </QuoteAuthor>
-              </TestimonialCard>
-
-              <TestimonialCard
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: 0.2 }}
-              >
-                <QuoteText>
-                  "From barely being able to run 1K to completing my first half marathon - the support 
-                  from this community has been incredible. They believe in you even when you don't 
-                  believe in yourself."
-                </QuoteText>
-                <QuoteAuthor>
-                  <AuthorImage>
-                    <img 
-                      src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&q=80" 
-                      alt="Michael"
-                    />
-                  </AuthorImage>
-                  <AuthorInfo>
-                    <h4>Michael Chen</h4>
-                    <p>Member since 2023</p>
-                  </AuthorInfo>
-                </QuoteAuthor>
-              </TestimonialCard>
-
-              <TestimonialCard
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: 0.4 }}
-              >
-                <QuoteText>
-                  "The weekend runs have become the highlight of my week. The positive energy and 
-                  encouragement from everyone make every session special."
-                </QuoteText>
-                <QuoteAuthor>
-                  <AuthorImage>
-                    <img 
-                      src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?auto=format&fit=crop&q=80" 
-                      alt="Emma"
-                    />
-                  </AuthorImage>
-                  <AuthorInfo>
-                    <h4>Emma Thompson</h4>
-                    <p>Member since 2023</p>
-                  </AuthorInfo>
-                </QuoteAuthor>
-              </TestimonialCard>
+              {testimonials.slice(0, 3).map((testimonial, index) => (
+                <TestimonialCard
+                  key={index}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.5, delay: index * 0.2 }}
+                >
+                  <QuoteText>
+                    "{testimonial.quote}"
+                  </QuoteText>
+                  <QuoteAuthor>
+                    <AuthorImage>
+                      <img
+                        src={testimonial.image}
+                        alt={testimonial.name}
+                      />
+                    </AuthorImage>
+                    <AuthorInfo>
+                      <h4>{testimonial.name}</h4>
+                      <p>Member since {testimonial.since}</p>
+                    </AuthorInfo>
+                  </QuoteAuthor>
+                </TestimonialCard>
+              ))}
             </TestimonialsGrid>
           </ContentWrapper>
         </Section>
@@ -381,4 +335,4 @@ const AboutUs = () => {
   );
 };
 
-export default AboutUs; 
+export default AboutUs;
