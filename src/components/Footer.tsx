@@ -65,12 +65,7 @@ const SocialLinks = styled.div`
   }
 `;
 
-const FooterBottom = styled.div`
-  text-align: center;
-  padding-top: 2rem;
-  border-top: 1px solid rgba(255, 255, 255, 0.1);
-  color: #888;
-`;
+// Footer styled components
 
 // SVG icons for social media
 const TelegramIcon = () => (
@@ -122,7 +117,7 @@ const Footer = () => {
             <h3>Quick Links</h3>
             <p><Link to="/">Home</Link></p>
             <p><Link to="/waiver">Sign Waiver</Link></p>
-            <p><Link to="/calendar">Event Calendar</Link></p>
+            <p><a href="https://www.strava.com/clubs/1240691" target="_blank" rel="noopener noreferrer">Events</a></p>
           </FooterSection>
 
           <FooterSection>
@@ -136,10 +131,10 @@ const Footer = () => {
               hello@comeoutside.run
             </p>
           </FooterSection>
-        </FooterGrid>   
+        </FooterGrid>
       </FooterContent>
     </FooterContainer>
   );
 };
 
-export default Footer; 
+export default Footer;
